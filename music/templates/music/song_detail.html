@@ -1,0 +1,8 @@
+<h3>{{ song_entry}}</h3>
+
+<a href="{{ song_entry.song.url }}" download="{{ song_entry }}">Download</a>
+
+{% if song_entry.lyrics %}
+<h4>Lyrics:</h4>
+<p>{{ song_entry.lyrics }}</p>
+{% endif %}

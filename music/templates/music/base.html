@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}MyShare{% endblock %}</title>
+</head>
+<body>
+    {% block nav_bar %}
+    <nav>
+        <a href="{% url 'music:index' %}">MyShare</a> |
+        {% if user.is_authenticated %}
+        <a href="{% url 'music:profile' %}">{{ user.username }}</a> |
+        <a href="{% url 'music:logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'music:login' %}">Login</a> |
+        <a href="{% url 'music:signup' %}">Sign Up</a>
+        {% endif %}
+        {% block upload %}
+        {% endblock %}
+    </nav>
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

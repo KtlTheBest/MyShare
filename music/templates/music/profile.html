@@ -1,0 +1,30 @@
+{% extends 'music/base.html' %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block upload %}
+| <a href="{% url 'music:add_song' %}">Upload</a>
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+{% if songs %}
+    Songs uploaded:
+    {% for song in songs %}
+        <ul>
+            <a href="{% url 'music:details' song.pk %}">{{ song }}</a> |
+            <a href="{% url 'music:delete' song.pk %}">Delete</a>
+        </ul>
+    {% endfor %}
+{% else %}
+    <h4>You don't have songs uploaded from your account yet...</h4>
+{% endif %}
+
+{% else %}
+
+<h3>You are currently are not logged in. Please <a href="{% url 'music:login' %}">login</a>!</h3>
+
+{% endif %}
+
+{% endblock %}

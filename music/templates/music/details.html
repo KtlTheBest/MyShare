@@ -1,0 +1,8 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+
+<h3>{{ song.title }}</h3>
+<h4><a href="{{ song.song.url }}" title="{{ song.title }}'s download link" download="{{ song }}">Download</a></h4>
+
+{% endblock %}

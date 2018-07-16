@@ -1,0 +1,24 @@
+{% extends 'music/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block nav_bar %}
+    <nav>
+        <a href="{% url 'music:index' %}">Home</a>
+    </nav>
+{% endblock %}
+{% block content %}
+{% if error_message %}
+    <div style="color:red;"><strong>{{ error_message }}</strong></div>
+{% endif %}
+<form action="{% url 'music:signup' %}" method="post">
+    {% csrf_token %}
+    {% include 'music/form-template.html' %}
+    {% for field in profile %}
+        <label>{{ field.label }}</label>
+        <div>{{ field }}</div>
+        <br>
+    {% endfor %}
+    <input type="submit" value="Sign Up">
+</form>
+{% endblock %}
