@@ -3,9 +3,6 @@
 {% block content %}
 
 {% if object_list %}
-    {% if user.is_authenticated %}
-    <h4><a href="{% url 'music:add_song' %}">Add Music</a></h4>
-    {% endif %}
     <ul>
     {% for song in all_songs %}
         <li><a href="{% url 'music:details' song.pk %}">{{ song }}</a></li>
