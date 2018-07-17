@@ -12,7 +12,7 @@ class Song(models.Model):
     title = models.CharField(max_length=50, default="Unknown")
     song = models.FileField()
 
-    user = models.ForeignKey(User, default=0)
+    user = models.ForeignKey(User, null=True, default=0, blank=True)
 
     def __str__(self):
         return self.artist + ' - ' + self.title

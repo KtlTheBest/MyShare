@@ -1,4 +1,7 @@
 {% for field in form %}
     <label>{{ field.label_tag }}</label>
+    {% if field.error %}
+        <strong style="color: red;">{{ field.error }}</strong>
+    {% endif %}
     <div>{{ field }}</div>
 {% endfor %}

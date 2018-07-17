@@ -35,16 +35,16 @@ class AddSong(generic.View):
         })
 
     def post(self, request):
-        upload_form = UploadForm(request.POST)
-        upload_form.data['user'] = request.user
+        upload_form = UploadForm(request.POST, request.FILES)
         if upload_form.is_valid():
             song = upload_form.save()
             song.user = request.user
             song.save()
-            next = request.POST.get('next', '/')
-            return redirect(next)
+            return redirect('music:add_song')
         else:
-            pass
+            return render(request, self.template_name,{
+                'form': upload_form,
+            })
 
 
 class SongDetail(generic.DetailView):
@@ -64,9 +64,8 @@ class SignUpView(generic.View):
     template_name = 'music/signup.html'
 
     def get(self, request):
-        form = self.form()
         return render(request, self.template_name, {
-            'form': form,
+            'form': self.form(),
         })
 
     def post(self, request):
@@ -76,19 +75,23 @@ class SignUpView(generic.View):
 
         if form.is_valid():
             user = form.save()
-            if request.POST['password'] != request.POST['password_retry']:
-                return render(request, self.template_name, {
-                    'form': form,
-                    'error_message': 'Password mismatch!'
-                })
+            #if request.POST['password'] != request.POST['password_retry']:
+            #    return render(request, self.template_name, {
+            #        'form': form,
+            #        'error_message': 'Password mismatch!'
+            #    })
 
-            user.set_password(user.password)
+            user.set_password(request.POST['password'])
             user.save()
 
-        auth_user = authenticate(username=user.username, password=request.POST['password'])
-        login(request, auth_user)
+            auth_user = authenticate(username=user.username, password=request.POST['password'])
+            login(request, auth_user)
 
-        return redirect('music:index')
+            return redirect('music:index')
+        else:
+            return render(request, self.template_name, {
+                'form': form,
+            })
 
 
 class LoginView(generic.View):
