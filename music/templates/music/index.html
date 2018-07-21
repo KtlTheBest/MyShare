@@ -1,7 +1,6 @@
 {% extends 'music/base.html' %}
 
 {% block content %}
-
 {% if object_list %}
     <ul>
     {% for song in all_songs %}
@@ -9,8 +8,6 @@
     {% endfor %}
     </ul>
 {% else %}
-    <H3>You don't have any songs yet..</H3>
     <h4>Currently there are no songs..</h4>
 {% endif %}
-
 {% endblock %}

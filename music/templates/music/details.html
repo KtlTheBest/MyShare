@@ -4,7 +4,14 @@
 
 {% block content %}
 
-<h3><a href="{{ song.song.url }}">{{ song.title }}</a></h3>
-<h4><a href="{{ song.song.url }}" title="{{ song.title }}'s download link" download="{{ song }}">Download</a></h4>
+<h4>Artist: {{ song.artist }}</h4>
+<h4>Song's Title: {{ song.title }}</h4>
+<br>
+
+Listen to {{ song.title }} <a href="{{ song.song.url }}">here</a>.
+
+<form>
+    <input type="button" class="btn btn-success btn-sm" value="Download" onClick="window.location.href='{{ song.song.url }}'">
+</form>
 
 {% endblock %}

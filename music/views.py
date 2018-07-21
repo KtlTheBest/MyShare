@@ -40,10 +40,11 @@ class AddSong(generic.View):
             song = upload_form.save()
             song.user = request.user
             song.save()
-            return redirect('music:add_song')
+            return render(request, template_name="music/success-submit.html")
         else:
             return render(request, self.template_name,{
                 'form': upload_form,
+                'error_message': 'Your file is not an audio file!',
             })
 
 

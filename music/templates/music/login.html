@@ -1,12 +1,14 @@
-<h3>Login</h3>
+{% extends 'music/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
 {% if error %}
 <p style="color: red">{{ error }}</p>
 {% endif %}
-<form action="{% url 'music:login' %}" method="post">
-    {% csrf_token %}
-    {% for field in form %}
-        <div><label>{{ field.label_tag }}</label></div>
-        <div>{{ field }}</div>
-    {% endfor %}
-<div><input type="submit" value="Log In"></div>
-</form>
+    <form action="{% url 'music:login' %}" method="post">
+        {% csrf_token %}
+        {% include 'music/form_template.html' %}
+        <div><input class="btn btn-default" type="submit" value="Log In"></div>
+    </form>
+{% endblock %}
