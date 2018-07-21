@@ -1,7 +1,18 @@
+{% csrf_token %}
 {% for field in form %}
-    <label>{{ field.label_tag }}</label>
-    {% if field.error %}
-        <strong style="color: red;">{{ field.error }}</strong>
-    {% endif %}
-    <div>{{ field }}</div>
+    <div class="form-group">
+        {% if field.error %}
+            <div class="warning">{{ field.error }}</div>
+        {% endif %}
+        {{ field.label_tag }}
+        {% if field.label == 'Song' %}
+            <div class="input-group">
+                <div class="custom-file">
+                    {{ field }}
+                </div>
+            </div>
+        {% else %}
+            {{ field }}
+        {% endif %}
+    </div>
 {% endfor %}

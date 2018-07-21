@@ -1,0 +1,10 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>You have successfully uploaded a song!</h1>
+    <p>You can go to a <a href="{% url 'music:index' %}">home</a> page or <a href="{% url 'music:add_song' %}">upload</a> another one!</p>
+</div>
+
+{% endblock %}
